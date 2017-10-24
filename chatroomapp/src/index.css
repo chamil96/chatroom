@@ -29,6 +29,11 @@ input[type="button"] {
   display: inherit;
 }
 
+.Replies li{
+    color: white;
+    list-style: none;
+}
+
 #header{
   text-align: center;
   color: white;

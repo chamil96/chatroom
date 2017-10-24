@@ -83,6 +83,16 @@ class App extends Component {
   render() {
     //loops through each commentlist list and returns comment with varius buttons
     const postedComments = this.state.commentsList.map(function(comment, i){
+
+      let addReplies = comment.replies.map(function(replies, i ){
+        return(
+          <li key={i}>
+            Reply: {replies.text}
+          </li>
+        )
+      }, this);
+
+
       return(
         <div className="posted_comments">
           <div className="comment-setup">
@@ -90,24 +100,19 @@ class App extends Component {
             <div className="comment_buttons">
               <textarea onChange={(e) => {this.handleReplyChange(e, i)}} id="commentbox" name="comment" rows="1" cols="30" placeholder="Reply"></textarea><br/>
               <input type="button" onClick={() => {this.handleReply(i)}} value="Reply" />
-              <input type="button" onClick={(like) => {this.likeCounter(i)}} value="Like" /> {comment.likes}
-              <input type="button" onClick={(like) => {this.dislikeCounter(i)}} value="Dislike" /> {comment.dislikes}
-              <input type="button" onClick={(like) => {this.handleDelete(i)}} value="Delete" />
+              <input type="button" onClick={() => {this.likeCounter(i)}} value="Like" /> {comment.likes}
+              <input type="button" onClick={() => {this.dislikeCounter(i)}} value="Dislike" /> {comment.dislikes}
+              <input type="button" onClick={() => {this.handleDelete(i)}} value="Delete" />
             </div>
+          </div>
+          <div>
+            <ul className="Replies">
+              {addReplies}
+            </ul>
           </div>
         </div>
       );
     }, this);
-
-    // const reply = this.state.commentsList[0].replies.map(function(comment, i){
-    //   return(
-    //     <div className="postedReplyComment">
-    //       <p>{comment.text}</p>
-    //     </div>
-    //   )
-    // }, this);
-
-
 
     return (
       <div className="App">
